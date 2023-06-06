@@ -28,7 +28,7 @@ public class UsersController {
         return "all_users";
     }
 
-    @GetMapping("/new")
+    @GetMapping("users/new")
     public String newUser(@ModelAttribute("user") User user) {
         return "new_user";
     }
@@ -39,7 +39,7 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("users/{id}/edit")
     public String editUser(Model model, @PathVariable("id") long id) {
         model.addAttribute("user", service.getUserById(id));
         return "edit_user";
