@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>New User</title>
 </head>
 <body>
 
-<form
-        th:method="POST" th:action="@{/users}" th:object="${user}">
-  <label for="name">Enter name:</label>
-  <input type="text" th:field="*{name}" id="name">
-  <br><br>
-  <label for="surname">Enter surname:</label>
-  <input type="text" th:field="*{surname}" id="surname">
+<form method="post" th:object="${user}">
+  <label>Name: </label>
+  <label>
+    <input type="text" name="name" th:field="*{name}" />
+  </label>
+  <label>Surname: </label>
+  <label>
+    <input type="text" name="surname" th:field="*{surname}" />
+  </label>
   <br>
-  <input type="submit" value="Create!">
+  <input type="submit" value="Save"/>
 </form>
+
 </body>
+</html>

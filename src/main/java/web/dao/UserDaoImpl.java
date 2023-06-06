@@ -1,6 +1,7 @@
 package web.dao;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,11 @@ public class UserDaoImpl implements UserDao {
     public List<User> getUsers() {
         return entityManager.createQuery("SELECT u FROM User u", User.class)
                 .getResultList();
+    }
+    @Override
+    @Transactional
+    public User showUserByID(int id) {
+        return entityManager.find(User.class, id);
     }
 
     @Override
@@ -40,4 +46,5 @@ public class UserDaoImpl implements UserDao {
     public User getUserById(long id) {
         return entityManager.find(User.class, id);
     }
+
 }

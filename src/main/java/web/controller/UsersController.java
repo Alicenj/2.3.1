@@ -11,9 +11,15 @@ import web.service.UserService;
 public class UsersController {
 
     private final UserService service;
+
     @Autowired
     public UsersController(UserService service) {
         this.service = service;
+    }
+    @GetMapping("/{id}")
+    public String showUserByID(Model model, @PathVariable("id") int id) {
+        model.addAttribute("allUsers", service.showUserByID(id));
+        return "show";
     }
 
     @GetMapping("/")

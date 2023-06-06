@@ -7,6 +7,7 @@ import java.util.List;
 public interface UserDao {
 
     List<User> getUsers();
+    User showUserByID(int id);
 
     void deleteUserById(long id);
 
@@ -17,3 +18,7 @@ public interface UserDao {
 
     User getUserById(long id);
 }
+
+
+
+    
