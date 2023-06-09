@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers() {
         return userDAO.getUsers();
     }
+
     @Override
     @Transactional
     public User showUserByID(int id) {
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void deleteUserById(long id) {
+    public void deleteUserById(int id) {
         userDAO.deleteUserById(id);
     }
 
@@ -46,8 +47,5 @@ public class UserServiceImpl implements UserService {
         userDAO.editUser(user);
     }
 
-    @Override
-    public User getUserById(long id) {
-        return userDAO.getUserById(id);
-    }
+
 }

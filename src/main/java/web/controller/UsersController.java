@@ -3,7 +3,13 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import web.model.User;
 import web.service.UserService;
 
@@ -16,9 +22,10 @@ public class UsersController {
     public UsersController(UserService service) {
         this.service = service;
     }
+
     @GetMapping("/{id}")
-    public String showUserByID(Model model, @PathVariable("id") int id) {
-        model.addAttribute("allUsers", service.showUserByID(id));
+    public String showUserByID(Model model, @PathVariable int id) {
+        model.addAttribute("user", service.showUserByID(id));
         return "show";
     }
 
@@ -29,30 +36,30 @@ public class UsersController {
     }
 
     @GetMapping("users/new")
-    public String newUser(@ModelAttribute("user") User user) {
+    public String newUser(@ModelAttribute User user) {
         return "new_user";
     }
 
     @PostMapping
-    public String addUser(@ModelAttribute("user") User user) {
+    public String addUser(@ModelAttribute User user) {
         service.addUser(user);
         return "redirect:/";
     }
 
     @GetMapping("users/{id}/edit")
-    public String editUser(Model model, @PathVariable("id") long id) {
-        model.addAttribute("user", service.getUserById(id));
+    public String editUser(Model model, @PathVariable int id) {
+        model.addAttribute("user", service.showUserByID(id));
         return "edit_user";
     }
 
     @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user) {
+    public String updateUser(@ModelAttribute User user) {
         service.editUser(user);
         return "redirect:/";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable("id") long id) {
+    public String deleteUser(@PathVariable int id) {
         service.deleteUserById(id);
         return "redirect:/";
     }

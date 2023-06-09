@@ -1,22 +1,32 @@
 package web.model;
 
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
-    @Column(name = "name")
+    @NotEmpty(message = "Имя не должно быть пустым")
+    @Size(min = 2, max = 30, message = "Длина имени должна составлять от 2 до 30 символов")
     private String name;
 
-    @Column(name = "surname")
+    @NotEmpty(message = "Фамилия не должна быть пустой\n")
+    @Size(min = 2, max = 30, message = "Длина фамилии должна составлять от 2 до 30 символов")
     private String surname;
 
-    @Column(name = "email")
+    @NotEmpty(message = "Адрес электронной почты не должен быть пустым")
+    @Email(message = "Недопустимый формат электронной почты")
     private String email;
 
     public User() {
@@ -28,11 +38,11 @@ public class User {
         this.email = email;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
